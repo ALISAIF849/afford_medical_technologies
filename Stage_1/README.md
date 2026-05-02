@@ -1,43 +1,26 @@
 # Stage 1: Priority Inbox System
 
-## Objective
+Build a backend service that ranks notifications by type and recency, keeping the top 10 most important items ready at all times.
 
-Implement a backend service that fetches notifications from the provided API and maintains a priority-based inbox that always displays the top 10 most important unread notifications.
+## What You're Building
 
-## Requirements
+Your job is to create the logic that sorts campus notifications intelligently. When the app needs notifications, your service should fetch them from the API, score each one based on what it is and when it arrived, then return the top 10.
 
-### Functional Requirements
-- Fetch notifications from the Notification API endpoint
-- Implement priority calculation based on:
-  - **Weight**: Placement > Result > Event (higher weight = higher priority)
-  - **Recency**: Newer notifications have higher priority
-- Return the top 10 most important unread notifications
-- Maintain efficiency as new notifications continuously arrive
+## The API
 
-### Non-Functional Requirements
-- Write production-quality, functional code (not pseudo-code)
-- Do NOT store notifications in a database
-- Do NOT hard-code or manually create notifications
-- Use only the provided API to fetch notifications
-- Code should be clean, well-organized, and maintainable
+You'll fetch notifications from:
 
-## Notification API
-
-### Endpoint
 ```
 GET http://20.207.122.201/evaluation-service/notifications
 ```
 
-### Constraints
-- This is a protected route
-- Query parameters: `limit`, `page`, `notification_type`
+Query parameters are available:
+- `limit` - How many to fetch
+- `page` - For pagination
+- `notification_type` - Filter by type
 
-### Notification Types
-- `"Event"` - Low priority
-- `"Result"` - Medium priority
-- `"Placement"` - High priority
+The API returns notifications like this:
 
-### Response Format
 ```json
 {
   "notifications": [
@@ -51,150 +34,118 @@ GET http://20.207.122.201/evaluation-service/notifications
 }
 ```
 
-## Implementation Strategy
+Three notification types exist:
+- `Placement` - High priority (companies, internships)
+- `Result` - Medium priority (grades, assessments)
+- `Event` - Low priority (workshops, announcements)
 
-### Step 1: API Integration
-- Create a module to fetch notifications from the API
-- Handle authentication/protected route requirements
-- Implement pagination if needed
+## How to Approach It
 
-### Step 2: Priority Calculation
-Define a scoring system that considers:
-- Notification type weight (Placement > Result > Event)
-- Time since notification (recency)
-- Combine weights to create final priority score
+### 1. Fetch the Data
+Connect to the API and pull notifications. Handle errors gracefully.
 
-### Step 3: Maintain Top 10
-- Implement efficient filtering algorithm
-- Keep track of viewed vs unviewed notifications
-- Update as new notifications arrive
+### 2. Score Each Notification
+Each notification gets a priority score based on:
+- **Type**: Placement scores higher than Result, which scores higher than Event
+- **Age**: Newer notifications score higher than old ones
 
-### Step 4: Output
-- Return sorted list of top 10 notifications
-- Display with priority ranking
-- Include all notification details
+A good formula is: `(Type_Weight × 30%) + (Recency_Score × 70%)`
 
-## Deliverables
+For example:
+- Placement weight = 100, Result = 66, Event = 33
+- Recency scores from 0-70 based on how fresh the notification is (24-hour window)
 
-1. **Solution File** (`solution.[language]`)
-   - Working implementation in your chosen language
-   - Main entry point should be clearly marked
-   - Include inline documentation
+### 3. Return the Top 10
+Sort by score and give back the 10 highest-scoring notifications.
+
+### 4. Keep it Fresh
+As new notifications arrive, your service should update the rankings continuously.
+
+## What You'll Submit
+
+You need three things:
+
+1. **Your Code** (`solution.[language]`)
+   - Working implementation in whatever language you choose
+   - Clean and readable, with comments where it helps
+   - Main entry point should be obvious
 
 2. **Design Document** (`Notification_System_Design.md`)
-   - Explanation of priority algorithm
-   - Data flow diagram (text or ASCII art)
-   - Complexity analysis
-   - Design decisions and rationale
-   - How new notifications are handled
-   - Efficiency approach
+   - Explain your scoring formula and why it works
+   - Include a quick flow diagram (text or ASCII is fine)
+   - Talk about how you'd handle new notifications arriving constantly
+   - Think about efficiency—how does it handle lots of notifications?
 
 3. **Screenshots**
-   - Place in `screenshots/` folder
-   - Evidence of code running successfully
-   - Console output showing top 10 notifications
-   - Multiple test runs if possible
+   - Save them in a `screenshots/` folder
+   - Show your code running and outputting the top 10
+   - Include console output if relevant
 
-## Language Choices
+## Pick Your Language
 
-You may implement in any language of your choice. Popular options:
-- **Python**: Quick to implement, good for data processing
-- **JavaScript/TypeScript**: If you prefer Node.js
-- **Java**: Enterprise approach
-- **Go**: Performance-focused
-- **Rust**: Systems programming approach
-- **C++**: Performance-critical
+Use whatever you're comfortable with:
+- **Python** — Data processing is easy, great for quick implementation
+- **JavaScript/TypeScript** — Node.js if that's your thing
+- **Java** — Enterprise feel, lots of libraries
+- **Go** — Clean and fast
+- **Rust** — If performance matters most
+- **C++** — Go for it if you want
 
-## Example Output Format
+## What Success Looks Like
+
+Your code should output something like:
 
 ```
 Priority Inbox - Top 10 Notifications
 =====================================
 
-1. [Priority Score: 95] [Placement] CSX Corporation hiring - 2026-04-22 17:51:18
-2. [Priority Score: 92] [Placement] Advanced Micro Devices Inc. hiring - 2026-04-22 17:49:42
-3. [Priority Score: 88] [Result] mid-sem - 2026-04-22 17:51:30
-4. [Priority Score: 85] [Event] tech-fest - 2026-04-22 17:50:06
-5. [Priority Score: 82] [Result] project-review - 2026-04-22 17:50:42
+1. [Score: 95] [Placement] CSX Corporation hiring - 2026-04-22 17:51:18
+2. [Score: 92] [Placement] AMD Inc. hiring - 2026-04-22 17:49:42
+3. [Score: 88] [Result] mid-sem - 2026-04-22 17:51:30
+4. [Score: 85] [Event] tech-fest - 2026-04-22 17:50:06
+5. [Score: 82] [Result] project-review - 2026-04-22 17:50:42
 ...
 ```
 
-## Testing Checklist
+## Before You Submit
 
-- [ ] API connection successful
-- [ ] Notifications fetched correctly
-- [ ] Priority sorting works as expected
-- [ ] Top 10 notifications returned
-- [ ] Handles multiple notification types
-- [ ] Efficient with large datasets
-- [ ] Clear and readable output
-- [ ] Screenshots captured and saved
+- [ ] Code compiles/runs without errors
+- [ ] API connection works
+- [ ] Priority sorting is correct
+- [ ] Top 10 displayed properly
+- [ ] Handles all three notification types
+- [ ] Handles lots of notifications without slowing down
+- [ ] Design doc explains your approach
+- [ ] Screenshots captured
 
 ## File Structure
 
+Keep it simple:
+
 ```
 Stage_1/
-├── README.md                    # This file
+├── README.md
 ├── Notification_System_Design.md
-├── solution.[language]          # Your implementation
-├── screenshots/
-│   ├── output_1.png
-│   ├── output_2.png
-│   └── ...
-└── [other files as needed]
+├── solution.[language]
+└── screenshots/
+    ├── output_1.png
+    └── (more as needed)
 ```
 
-## Tips for Success
+## How to Build It
 
-1. **Understand the Algorithm First**
-   - Clearly define your priority calculation
-   - Document the formula before coding
-
-2. **Test with Real Data**
-   - Use actual API responses
-   - Test with different notification types
-   - Verify priority sorting
-
-3. **Write Clear Code**
-   - Use meaningful variable names
-   - Add comments for complex logic
-   - Structure with functions/classes
-
-4. **Design for Scale**
-   - Consider efficiency as notifications grow
-   - Optimize for retrieval speed
-   - Plan for real-time updates
-
-5. **Document Thoroughly**
-   - Explain your approach
-   - Include examples
-   - Show your thinking process
-
-## Submission Checklist
-
-Before submitting, ensure:
-- [ ] Code is complete and working
-- [ ] No pseudo-code, only production-ready implementation
-- [ ] `Notification_System_Design.md` is detailed and clear
-- [ ] Screenshots show working output
-- [ ] All files are in this directory
-- [ ] Ready to be committed to GitHub
-
-## Next Steps
-
-1. Choose your programming language
-2. Create `solution.[language]` file
-3. Implement API integration
-4. Build priority algorithm
-5. Test and refine
-6. Create `Notification_System_Design.md`
-7. Take screenshots
+1. Pick your language
+2. Create the solution file
+3. Connect to the API
+4. Build the scoring algorithm
+5. Test it with real notifications
+6. Write your design doc
+7. Grab some screenshots
 8. Commit to GitHub
 
----
+## How You'll Be Scored
 
-**Evaluation Criteria**:
-- Code quality and efficiency (40%)
-- Correct priority calculation (30%)
-- Documentation and design explanation (20%)
-- Screenshots and evidence (10%)
+- **Code quality & efficiency** (40%) — Does it work well? Is it fast?
+- **Correct priority math** (30%) — Does your algorithm actually rank them right?
+- **Documentation** (20%) — Can someone understand your approach?
+- **Screenshots** (10%) — Proof it's working

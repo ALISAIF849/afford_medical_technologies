@@ -1,7 +1,9 @@
 import { useState } from 'react';
 
+// Define the three notification types we work with
 type NotificationType = 'Placement' | 'Result' | 'Event';
 
+// Each notification has an ID, type, message, timestamp, and a viewed flag
 type NotificationItem = {
   ID: string;
   Type: NotificationType;
@@ -10,8 +12,11 @@ type NotificationItem = {
   viewed: boolean;
 };
 
+// Filter values: show all, filter by type, or show only unread
 type FilterValue = 'All' | NotificationType | 'unread';
 
+// Demo notifications serve as fallback content if the API is unavailable
+// This ensures the app always shows something useful to the user
 const demoNotifications: NotificationItem[] = [
   {
     ID: 'demo-placement-001',
@@ -57,19 +62,27 @@ const demoNotifications: NotificationItem[] = [
   },
 ];
 
+// Color scheme for notification types — helps users quickly identify what matters
 const typeColors: Record<NotificationType, string> = {
-  Placement: '#16a34a',
-  Result: '#2563eb',
-  Event: '#f59e0b',
+  Placement: '#16a34a', // Green for placements (hiring, internships)
+  Result: '#2563eb',    // Blue for results (grades, assessments)
+  Event: '#f59e0b',     // Orange for events (workshops, announcements)
 };
 
+// Priority scoring algorithm: type matters 30%, recency matters 70%
+// This keeps fresh notifications and important types (Placements) at the top
 function calculatePriorityScore(notification: NotificationItem) {
+  // Type weights: Placements are most important, Results medium, Events lower
   const typeWeight = notification.Type === 'Placement' ? 100 : notification.Type === 'Result' ? 66 : 33;
+  // Convert timestamp to minutes old, then scale to 24-hour window
   const ageInMinutes = (Date.now() - new Date(notification.Timestamp).getTime()) / 60000;
+  // Newer notifications get higher recency scores (max 70 points)
   const recencyScore = Math.max(0, 70 - (ageInMinutes / (24 * 60)) * 70);
+  // Combine: 30% of type weight + 70% of recency score
   return (typeWeight / 100) * 30 + recencyScore;
 }
 
+// Format timestamps in a human-readable way (e.g., "May 2, 3:45 PM")
 function formatTime(timestamp: string) {
   return new Date(timestamp).toLocaleString([], {
     month: 'short',
@@ -80,24 +93,30 @@ function formatTime(timestamp: string) {
 }
 
 function App() {
+  // State: list of all notifications and the current filter
   const [notifications, setNotifications] = useState<NotificationItem[]>(demoNotifications);
   const [filter, setFilter] = useState<FilterValue>('All');
 
+  // Calculate priority score for each notification and sort by score descending
+  // This creates the ranked list used in the "Top ranked items" section
   const scored = notifications
     .map((notification) => ({ notification, score: calculatePriorityScore(notification) }))
     .sort((a, b) => b.score - a.score);
 
+  // Count notifications by type and viewed status — used for stat cards
   const unreadCount = notifications.filter((notification) => !notification.viewed).length;
   const placementCount = notifications.filter((notification) => notification.Type === 'Placement').length;
   const resultCount = notifications.filter((notification) => notification.Type === 'Result').length;
   const eventCount = notifications.filter((notification) => notification.Type === 'Event').length;
 
+  // Apply current filter to notifications for display
   const visibleNotifications = notifications.filter((notification) => {
     if (filter === 'unread') return !notification.viewed;
     if (filter === 'All') return true;
     return notification.Type === filter;
   });
 
+  // Toggle the viewed/unread status of a single notification
   const toggleViewed = (id: string) => {
     setNotifications((current) =>
       current.map((notification) =>
@@ -106,10 +125,12 @@ function App() {
     );
   };
 
+  // Reset demo: refresh the demo notifications and mark all as unread
   const refreshDemo = () => {
     setNotifications(demoNotifications.map((notification) => ({ ...notification, viewed: false })));
   };
 
+  // Stat cards display: show counts for each category
   const statCards = [
     { label: 'Placements', value: placementCount, accent: '#16a34a' },
     { label: 'Results', value: resultCount, accent: '#2563eb' },
@@ -117,6 +138,7 @@ function App() {
     { label: 'Unread', value: unreadCount, accent: '#0f766e' },
   ];
 
+  // Filter button options: users can filter by type or show unread only
   const filters: Array<{ label: string; value: FilterValue }> = [
     { label: 'All', value: 'All' },
     { label: 'Placements', value: 'Placement' },

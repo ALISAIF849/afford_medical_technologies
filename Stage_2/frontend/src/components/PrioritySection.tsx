@@ -1,17 +1,26 @@
+/**
+ * PrioritySection Component
+ * 
+ * Shows the top 10 most important notifications.
+ * These are ranked by the priority algorithm (type weight + recency).
+ * Helps users quickly see what needs attention most.
+ */
+
 import React from 'react';
 import { Box, Typography, Divider, Alert } from '@mui/material';
 import { NotificationItem } from './NotificationItem';
 import { Notification, PriorityScore } from '../types/notifications';
 
 interface PrioritySectionProps {
-  notifications: PriorityScore[];
-  onToggleView?: (id: string) => void;
+  notifications: PriorityScore[];     // Scored and ranked notifications
+  onToggleView?: (id: string) => void;  // Callback to mark as read/unread
 }
 
 export const PrioritySection: React.FC<PrioritySectionProps> = ({
   notifications,
   onToggleView,
 }) => {
+  // Show empty state if no notifications to rank
   if (notifications.length === 0) {
     return (
       <Box mb={4}>
@@ -34,6 +43,7 @@ export const PrioritySection: React.FC<PrioritySectionProps> = ({
 
   return (
     <Box mb={4}>
+      {/* Section title */}
       <Typography
         variant="h6"
         sx={{
@@ -47,6 +57,7 @@ export const PrioritySection: React.FC<PrioritySectionProps> = ({
         ⭐ Top 10 Priority Notifications
       </Typography>
 
+      {/* Display ranked notifications */}
       <Box
         sx={{
           bgcolor: '#e3f2fd',

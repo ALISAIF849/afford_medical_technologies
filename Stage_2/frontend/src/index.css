@@ -1,4 +1,10 @@
-/* Global Styles */
+/**
+ * Global Styles
+ * 
+ * Resets browser defaults and sets up a consistent, clean foundation.
+ * Includes light theme colors, responsive font smoothing, and base styling.
+ * All specific component styling is handled in-component via Material UI or inline styles.
+ */
 
 * {
   margin: 0;

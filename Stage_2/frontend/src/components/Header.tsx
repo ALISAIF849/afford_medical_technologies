@@ -1,12 +1,19 @@
+/**
+ * Header Component
+ * 
+ * Shows the app title, notification count, and a refresh button.
+ * Gives users a quick way to reload notifications and see the total count.
+ */
+
 import React from 'react';
 import { Box, Typography, Button, Tooltip } from '@mui/material';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 
 interface HeaderProps {
-  totalNotifications?: number;
-  onRefresh?: () => void;
-  isRefreshing?: boolean;
+  totalNotifications?: number;      // Total count of notifications to display
+  onRefresh?: () => void;            // Callback when user clicks refresh
+  isRefreshing?: boolean;            // Whether a refresh is currently happening
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -25,6 +32,7 @@ export const Header: React.FC<HeaderProps> = ({
         borderBottom: '2px solid #1976d2',
       }}
     >
+      {/* Logo and title section */}
       <Box display="flex" alignItems="center" gap={2}>
         <NotificationsActiveIcon sx={{ fontSize: 32, color: '#1976d2' }} />
         <Box>
@@ -44,6 +52,7 @@ export const Header: React.FC<HeaderProps> = ({
         </Box>
       </Box>
 
+      {/* Notification count and refresh button */}
       <Box display="flex" alignItems="center" gap={2}>
         {totalNotifications > 0 && (
           <Typography

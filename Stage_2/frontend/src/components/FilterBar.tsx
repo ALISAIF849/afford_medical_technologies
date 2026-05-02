@@ -1,10 +1,17 @@
+/**
+ * FilterBar Component
+ * 
+ * Provides filter buttons to show notifications by type (Placements, Results, Events)
+ * or show only unread items. Helps users focus on what matters most.
+ */
+
 import React from 'react';
 import { Box, Button, ButtonGroup, Typography } from '@mui/material';
 
 interface FilterBarProps {
-  activeFilter: string;
-  onFilterChange: (filter: string) => void;
-  unreadCount?: number;
+  activeFilter: string;              // Which filter is currently selected
+  onFilterChange: (filter: string) => void;  // Callback when user clicks a filter
+  unreadCount?: number;              // Number of unread items (for display)
 }
 
 export const FilterBar: React.FC<FilterBarProps> = ({
@@ -12,6 +19,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   onFilterChange,
   unreadCount = 0,
 }) => {
+  // Available filter options: type filters + unread-only
   const filters = [
     { label: 'All', value: 'All' },
     { label: 'Placements', value: 'Placement' },
@@ -34,10 +42,12 @@ export const FilterBar: React.FC<FilterBarProps> = ({
         gap: 2,
       }}
     >
+      {/* Filter label and buttons */}
       <Box display="flex" alignItems="center" gap={1}>
         <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
           Filter by Type:
         </Typography>
+        {/* Show unread count badge if there are unread notifications */}
         {unreadCount > 0 && (
           <Typography
             variant="caption"

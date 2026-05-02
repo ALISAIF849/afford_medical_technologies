@@ -1,28 +1,31 @@
 /**
- * API Service for Notifications
- * Handles all HTTP requests to the notifications API
+ * Notifications API Service
+ * Handles fetching notifications from the backend API
+ * Includes error handling and graceful fallbacks
  */
 
 import axios from 'axios';
 import { NotificationResponse, FilterOptions } from '../types/notifications';
 
+// Get API endpoint from environment, fallback to campus API server
 const API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT || 'http://20.207.122.201/evaluation-service';
 
+// Create axios instance with sensible defaults
 const api = axios.create({
   baseURL: API_ENDPOINT,
-  timeout: 10000,
+  timeout: 10000, // 10 second timeout for API calls
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-// Add request interceptor for logging
+// Log outgoing API requests (with emoji for easy spotting in console)
 api.interceptors.request.use((config) => {
   console.log('🔄 API Request:', config.url);
   return config;
 });
 
-// Add response interceptor for error handling
+// Handle API responses and errors gracefully
 api.interceptors.response.use(
   (response) => {
     console.log('✅ API Response:', response.data);
@@ -39,8 +42,10 @@ api.interceptors.response.use(
 
 /**
  * Fetch notifications from the API
- * @param options - Filter and pagination options
- * @returns Promise containing notifications
+ * Falls back to empty array if API is unavailable
+ * 
+ * @param options - Filter and pagination options (limit, page, type)
+ * @returns Promise with notifications array (may be empty on error)
  */
 export async function fetchNotifications(
   options?: FilterOptions
@@ -48,6 +53,7 @@ export async function fetchNotifications(
   try {
     const params = new URLSearchParams();
 
+    // Add optional query parameters if provided
     if (options?.limit) {
       params.append('limit', options.limit.toString());
     }
@@ -56,6 +62,7 @@ export async function fetchNotifications(
       params.append('page', options.page.toString());
     }
 
+    // Filter by notification type if specified (skip if "All")
     if (options?.type && options.type !== 'All') {
       params.append('notification_type', options.type);
     }
@@ -65,7 +72,7 @@ export async function fetchNotifications(
     
     const response = await api.get(url);
     
-    // Ensure response has notifications array
+    // Ensure response has the expected structure
     if (!response.data || !Array.isArray(response.data.notifications)) {
       console.warn('⚠️ Unexpected API response format:', response.data);
       return { notifications: [] };
@@ -73,8 +80,8 @@ export async function fetchNotifications(
     
     return response.data;
   } catch (error) {
+    // If API fails, return empty array (frontend will show demo data instead)
     console.error('❌ Failed to fetch notifications:', error);
-    // Return empty array instead of throwing
     return { notifications: [] };
   }
 }
