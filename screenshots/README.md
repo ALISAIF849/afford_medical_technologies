@@ -6,6 +6,8 @@ Screenshots of the working Campus Notifications application on `http://localhost
 
 **File**: `dashboard-overview.png`
 
+![Dashboard Overview](dashboard-overview.png)
+
 Shows the main dashboard with:
 - Priority inbox header with stats (Placements: 2, Results: 2, Events: 2, Unread: 6)
 - Priority preview section showing top ranked items with priority scores
