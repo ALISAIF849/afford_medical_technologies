@@ -39,6 +39,7 @@ frontend/
 │   ├── hooks/            # Custom hooks
 │   └── types/            # TypeScript types
 ├── index.html            # Root HTML
+├── package-lock.json      # Dependency lock file
 ├── vite.config.ts        # Vite config
 └── package.json
 ```

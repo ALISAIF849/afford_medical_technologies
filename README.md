@@ -6,7 +6,8 @@ This repository contains the campus notifications assessment project. It is spli
 
 - **Stage 1**: Priority inbox logic and design notes
 - **Stage 2**: Responsive React frontend
-- **Shared docs**: Setup, guidelines, and submission notes- **screenshots/**: Working app in action
+- **Shared docs**: Setup, guidelines, and submission notes
+- **screenshots/**: Working app in action
 ## Project Layout
 
 ```
@@ -16,8 +17,7 @@ afford_medial_tech/
 ├── notification_system_design.md
 ├── Stage_1/
 ├── Stage_2/
-├── screenshots/           ← Live app screenshots
-└── .dist/
+└── screenshots/           ← Live app screenshots
 ```
 
 ## Stage Summary
@@ -87,7 +87,7 @@ The `screenshots/` folder contains evidence of the working application:
 
 ![Notification Feed](screenshots/notification-feed.png)
 
-Screenshots show the app running on `localhost:3000` with demo notifications. See [screenshots/README.md](screenshots/README.md) for details.
+Screenshots show the app running on `localhost:3000` with demo notifications.
 
 ## License
 
