@@ -81,10 +81,13 @@ The frontend runs on `http://localhost:3000`.
 The `screenshots/` folder contains evidence of the working application:
 
 - **dashboard-overview.png** — Priority inbox with stats and top ranked notifications
+- **notification-feed.png** — Full notification board with filters and read status actions
 
 ![Dashboard Overview](screenshots/dashboard-overview.png)
 
-Screenshot shows the app running on `localhost:3000` with demo notifications. See [screenshots/README.md](screenshots/README.md) for details.
+![Notification Feed](screenshots/notification-feed.png)
+
+Screenshots show the app running on `localhost:3000` with demo notifications. See [screenshots/README.md](screenshots/README.md) for details.
 
 ## License
 

@@ -18,6 +18,8 @@ Shows the main dashboard with:
 
 **File**: `notification-feed.png`
 
+![Notification Feed](notification-feed.png)
+
 Shows the notification board with:
 - Individual notification cards with color-coded left borders
 - Type badges: **Placement** (green), **Result** (blue), **Event** (orange)
