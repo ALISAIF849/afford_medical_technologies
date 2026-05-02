@@ -1,0 +1,82 @@
+/**
+ * AFFORDMED Campus Notifications Microservice
+ * Stage 1: Priority Inbox System
+ * 
+ * This solution implements a priority-based notification system that:
+ * 1. Fetches notifications from the provided API
+ * 2. Calculates priority based on type weight and recency
+ * 3. Returns the top 10 most important unread notifications
+ * 4. Maintains efficiency as new notifications arrive
+ * 
+ * Implementation Language: [Choose one: Python, JavaScript, TypeScript, Java, Go, Rust, C++, etc.]
+ * 
+ * Author: [Your Name]
+ * Date: [Implementation Date]
+ */
+
+// ============================================================================
+// TODO: IMPLEMENT YOUR SOLUTION HERE
+// ============================================================================
+//
+// Replace this template with your complete, production-ready implementation.
+//
+// Requirements:
+// 1. Fetch notifications from: http://20.207.122.201/evaluation-service/notifications
+// 2. Calculate priority based on:
+//    - Type weight: Placement (100) > Result (66) > Event (33)
+//    - Recency: Newer notifications have higher priority
+// 3. Return top 10 notifications sorted by priority (highest first)
+// 4. Handle new notifications efficiently
+// 5. Do NOT use a database - work with in-memory data only
+// 6. Do NOT hard-code notifications - use the API
+//
+// Output should display:
+// - Ranking (1-10)
+// - Priority score
+// - Notification type
+// - Message
+// - Timestamp
+//
+// Example Output:
+// ============================================
+// Priority Inbox - Top 10 Notifications
+// ============================================
+// 1. [Priority: 95] [Placement] CSX Corporation hiring - 2026-04-22 17:51:18
+// 2. [Priority: 92] [Placement] Advanced Micro Devices hiring - 2026-04-22 17:49:42
+// ...
+// 10. [Priority: 60] [Event] tech-fest - 2026-04-22 17:50:06
+// ============================================
+//
+// Structure your solution as follows:
+//
+// 1. API CLIENT MODULE
+//    - Fetch notifications from API
+//    - Handle pagination if needed
+//    - Error handling
+//
+// 2. PRIORITY CALCULATOR
+//    - Define priority scoring formula
+//    - Calculate type weight
+//    - Calculate recency score
+//    - Combine into final priority
+//
+// 3. NOTIFICATION MANAGER
+//    - Maintain notification list
+//    - Filter by viewed/unviewed status
+//    - Sort by priority
+//    - Get top N notifications
+//
+// 4. OUTPUT FORMATTER
+//    - Format notifications for display
+//    - Show priority ranking
+//    - Display all relevant info
+//
+// 5. MAIN EXECUTION
+//    - Orchestrate the above modules
+//    - Display results
+//
+// ============================================================================
+
+console.log("TODO: Implement Campus Notifications Priority System");
+console.log("See README.md for detailed requirements");
+console.log("See Notification_System_Design.md for your design approach");
