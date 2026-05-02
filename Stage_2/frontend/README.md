@@ -59,7 +59,7 @@ src/
 ├── styles/             # Global styles and theme
 │   └── theme.ts
 ├── App.tsx             # Root component
-└── index.tsx           # Entry point
+└── main.tsx            # Entry point
 ```
 
 ## Key Components

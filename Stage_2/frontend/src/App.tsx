@@ -10,7 +10,7 @@ import { FilterBar } from './components/FilterBar';
 import { PrioritySection } from './components/PrioritySection';
 import { NotificationList } from './components/NotificationList';
 import { fetchNotifications } from './services/api';
-import { getTopNotifications, filterByType, getUnreadNotifications, calculatePriorityScore } from './hooks/useNotifications';
+import { filterByType, getUnreadNotifications, calculatePriorityScore } from './hooks/useNotifications';
 import { Notification, PriorityScore } from './types/notifications';
 
 const theme = createTheme({
