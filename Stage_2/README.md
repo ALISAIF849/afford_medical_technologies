@@ -118,6 +118,15 @@ npm run build
 
 This creates an optimized version in the `dist/` folder ready to deploy.
 
+## See It In Action
+
+Screenshots of the working app are available in the `../screenshots/` folder:
+
+- **dashboard-overview.png** — Shows the priority inbox, stats cards, and top ranked items
+- **notification-feed.png** — Shows the full notification board with filtering and interaction
+
+Run the dev server and visit `http://localhost:3000` to see the app live.
+
 ## Next: Stage 1
 
 The frontend is just the UI. Behind the scenes, there should be a backend service (Stage 1) that handles the priority logic and top 10 selection, though this frontend can work standalone with its own priority calculation.
