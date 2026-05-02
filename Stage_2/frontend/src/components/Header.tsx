@@ -39,7 +39,7 @@ export const Header: React.FC<HeaderProps> = ({
             Campus Notifications
           </Typography>
           <Typography variant="caption" sx={{ color: '#666' }}>
-            AFFORDMED Platform
+            Campus Notifications Platform
           </Typography>
         </Box>
       </Box>

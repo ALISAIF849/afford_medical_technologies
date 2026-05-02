@@ -1,12 +1,10 @@
 # Campus Notifications Microservice
 
-A comprehensive notification system for AFFORDMED's campus platform that helps students receive and manage real-time updates regarding placements, events, and results.
+A multi-stage campus notification platform that helps students receive and manage real-time updates regarding placements, events, and results.
 
 ## Project Overview
 
-This project implements a multi-stage campus notification platform with a priority-based inbox system and a responsive user interface.
-
-**Organization**: AFFORDMED - Technology, Innovation & Affordability
+This project implements a priority-based inbox system and a responsive user interface for campus notifications.
 
 ## Key Features
 
@@ -21,6 +19,10 @@ This project implements a multi-stage campus notification platform with a priori
 afford_medical_tech/
 ├── README.md                    # Project overview
 ├── CONTRIBUTING.md              # Contribution guidelines
+├── logging_middleware/          # Logging utilities and notes
+├── notification_system_design.md # Shared design summary
+├── notification_app_be/         # Backend implementation area
+├── notification_app_fe/         # Frontend implementation area
 ├── Stage_1/                     # Priority inbox system
 │   ├── README.md
 │   ├── Notification_System_Design.md
@@ -28,7 +30,7 @@ afford_medical_tech/
 │   └── screenshots/
 ├── Stage_2/                     # Frontend application
 │   ├── README.md
-│   ├── frontend/                # React/Next.js application
+│   ├── frontend/                # React application
 │   └── screenshots/
 └── .dist/                       # Build output
 ```
@@ -45,7 +47,7 @@ Implement a backend service that:
 **Status**: In Development
 
 ### Stage 2: Responsive Frontend
-Develop a React/Next.js application that:
+Develop a React application that:
 - Displays all notifications
 - Shows prioritized notifications separately
 - Allows filtering by notification type
@@ -175,7 +177,7 @@ The following roles exist in the context of this project but are imaginary for e
 
 ## License
 
-AFFORDMED Project - 2026
+Campus Notifications Project - 2026
 
 ---
 

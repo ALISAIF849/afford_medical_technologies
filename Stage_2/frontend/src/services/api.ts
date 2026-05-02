@@ -6,7 +6,7 @@
 import axios from 'axios';
 import { NotificationResponse, FilterOptions } from '../types/notifications';
 
-const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT || 'http://20.207.122.201/evaluation-service';
+const API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT || 'http://20.207.122.201/evaluation-service';
 
 const api = axios.create({
   baseURL: API_ENDPOINT,

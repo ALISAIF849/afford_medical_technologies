@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This is an AFFORDMED Campus Notifications Microservice project developed across multiple stages. Each stage builds upon previous work and involves individual contributions.
+This is a campus notifications microservice project developed across multiple stages. Each stage builds upon previous work and involves individual contributions.
 
 ## Important Guidelines
 
@@ -48,7 +48,7 @@ Each stage requires:
 ```bash
 # Clone your repository
 git clone <your-repo-url>
-cd afford_medical_tech
+cd <your-repository>
 
 # Create a feature branch for each stage
 git checkout -b stage-1-implementation
@@ -83,7 +83,7 @@ Closes #issue-number (if applicable)
 ### File Organization
 
 ```
-afford_medical_tech/
+<repository-name>/
 ├── README.md
 ├── CONTRIBUTING.md
 ├── Stage_1/
