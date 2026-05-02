@@ -13,10 +13,7 @@ This repository contains the campus notifications assessment project. It is spli
 afford_medial_tech/
 ├── README.md
 ├── CONTRIBUTING.md
-├── logging_middleware/
 ├── notification_system_design.md
-├── notification_app_be/
-├── notification_app_fe/
 ├── Stage_1/
 ├── Stage_2/
 ├── screenshots/           ← Live app screenshots
